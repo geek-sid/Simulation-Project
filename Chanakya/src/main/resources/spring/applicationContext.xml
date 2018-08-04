@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   					   http://www.springframework.org/schema/context
+        				   http://www.springframework.org/schema/context/spring-context.xsd
+        				   http://www.springframework.org/schema/mvc
+        				   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        				   http://www.springframework.org/schema/aop
+	  					   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	  					   http://www.springframework.org/schema/task 
+	  					   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+	<mvc:annotation-driven />
+	<aop:aspectj-autoproxy />
+	<task:annotation-driven />
+	<context:annotation-config/>
+	<context:component-scan base-package="com.simulator.*,com.simulation.*" />
+
+	<!--<bean id="filterAspect" class="com.simulator.aspects.FilterAspect" /> -->
+	
+	<!-- Message resource Configuration -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>locale\messages</value>
+		</property>
+	</bean>
+
+	<!-- Database Configuration -->
+	<bean class="com.simulator.application.ApplicationContextConfig"/>
+	<!-- <import resource="classpath:database/DataSource.xml" />
+	<import resource="classpath:database/DataSource1.xml" />
+	<import resource="classpath:hibernate/hibernate-cfg.xml" /> -->
+	<import resource="classpath:spring/hibernate-dao.xml" />
+	<import resource="classpath:spring/business-delegate.xml" />
+
+</beans>
